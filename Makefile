@@ -25,11 +25,11 @@ test:
 
 #build: @ Build
 build:
-	@export GOFLAGS=$(GOFLAGS); export CGO_ENABLED=0; go build -a -o ./main/main ./main/main.go;
+	@export GOFLAGS=$(GOFLAGS); export CGO_ENABLED=0; cd main; go build -a -o main .main.go; cd ..;
 
 #run: @ Run locally
 run: build
-	@export GOFLAGS=$(GOFLAGS); export TZ="UTC"; go run main.go -env-file .env
+	@export GOFLAGS=$(GOFLAGS); export TZ="UTC"; cd main; go run main.go -env-file .env; cd ..;
 
 #release: @ Create and push a new tag
 release: build
