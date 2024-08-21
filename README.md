@@ -1,2 +1,2 @@
 # pub-sub
-pub-sub is a publisher subscriber implementation in Go :)
+pub-sub is a publisher subscriber implementation in Go
