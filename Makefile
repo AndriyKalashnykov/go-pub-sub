@@ -25,11 +25,11 @@ test:
 
 #build: @ Build
 build:
-	@export GOFLAGS=$(GOFLAGS); export CGO_ENABLED=0; cd main; go build -a -o main .main.go; cd ..;
+	@export GOFLAGS=$(GOFLAGS); export CGO_ENABLED=0; go build -a -o main ./main/main.go
 
 #run: @ Run locally
 run: build
-	@export GOFLAGS=$(GOFLAGS); export TZ="UTC"; cd main; go run main.go -env-file .env; cd ..;
+	@export GOFLAGS=$(GOFLAGS); export TZ="UTC"; go run ./main/main.go -env-file .env
 
 #release: @ Create and push a new tag
 release: build
@@ -45,7 +45,7 @@ release: build
 
 #update: @ Update dependencies to latest versions
 update:
-	@export GOFLAGS=$(GOFLAGS); cd main; go get -u; go mod tidy; cd ..
+	@export GOFLAGS=$(GOFLAGS); go get -u ./...; go mod tidy 
 
 critic:
 	gocritic check -enableAll ./...
