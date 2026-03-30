@@ -1,8 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
+    ":semanticCommitType(chore)",
     "config:best-practices",
-    ":dependencyDashboard",
     "schedule:daily"
   ],
   "postUpdateOptions": [
@@ -27,6 +27,37 @@
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": true
+    },
+    {
+      "description": "Wait 3 days before automerging major updates",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Group GitHub Actions into one PR",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "groupName": "GitHub Actions"
     }
-  ]
+  ],
+  "automergeType": "branch",
+  "prHourlyLimit": 0,
+  "commitBody": "Signed-off-by: Renovate Bot <bot@renovateapp.com>",
+  "prConcurrentLimit": 50,
+  "automerge": true,
+  "ignoreTests": false,
+  "automergeStrategy": "squash",
+  "labels": [
+    "dependencies"
+  ],
+  "vulnerabilityAlerts": {
+    "labels": [
+      "security"
+    ],
+    "automerge": true,
+    "minimumReleaseAge": "0 days"
+  }
 }
