@@ -1,3 +1,3 @@
 module github.com/andriykalashnykov/go-pub-sub
 
-go 1.25.5
+go 1.26

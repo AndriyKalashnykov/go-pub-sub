@@ -2,9 +2,10 @@ CURRENTTAG:=$(shell git describe --tags --abbrev=0)
 NEWTAG ?= $(shell bash -c 'read -p "Please provide a new tag (currnet tag - ${CURRENTTAG}): " newtag; echo $$newtag')
 GOFLAGS=-mod=mod
 
+.PHONY: help deps lint test build run release update critic sec ci
+
 #help: @ List available tasks
 help:
-	@clear
 	@echo "Usage: make COMMAND"
 	@echo "Commands :"
 	@grep -E '[a-zA-Z\.\-]+:.*?@ .*$$' $(MAKEFILE_LIST)| tr -d '#' | awk 'BEGIN {FS = ":.*?@ "}; {printf "\033[32m%-15s\033[0m - %s\n", $$1, $$2}'
@@ -45,7 +46,10 @@ release: build
 
 #update: @ Update dependencies to latest versions
 update:
-	@export GOFLAGS=$(GOFLAGS); go get -u ./...; go mod tidy 
+	@export GOFLAGS=$(GOFLAGS); go get -u ./...; go mod tidy
+
+#ci: @ Run CI checks locally
+ci: lint test build
 
 critic:
 	gocritic check -enableAll ./...

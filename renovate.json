@@ -6,7 +6,8 @@
     "schedule:daily"
   ],
   "postUpdateOptions": [
-    "gomodTidy"
+    "gomodTidy",
+    "gomodUpdateImportPaths"
   ],
   "commitMessagePrefix": "chore(all): ",
   "commitMessageAction": "update",
